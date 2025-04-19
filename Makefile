@@ -1,11 +1,8 @@
-MANUAL_LIST=rvx_install_manual
+MANUAL_LIST=rvx_install_manual_en rvx_install_manual_ko
 
 all: ${MANUAL_LIST}
 
 ${MANUAL_LIST}:
-	-mkdir figures
-	cd $@ && pandoc $@.tex -s -o $@.html
-	-cd $@ && cp -r ./figures/* ${CURDIR}/figures
-	mv -f ./$@/$@.html ${CURDIR}
+	@python3 rvx_docs.py -cmd latex2html -i ${CURDIR}/$@/$@.tex -o ${CURDIR}
 
 .PHONY: ${MANUAL_LIST}
